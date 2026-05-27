@@ -2,13 +2,13 @@
     "start_year": 2015,
     "end_year": 2300,
     "data_timestep": 5,
-    "timestep": 5,
-    "emission_control_start_year": 2020,
+    "timestep": 1,
+    "emission_control_start_year": 2025,
     "n_rbfs": 4,
     "n_inputs": 2,
     "epsilons": [
-        50.0,
-        0.05,
+        0.1,
+        0.25,
         10.0,
         10.0
     ],
