@@ -199,6 +199,22 @@ def model_wrapper_local(**kwargs) -> tuple[float, float, float, float]:
             abatement_type=abatement_type,
             social_welfare_function_type=swf_type,
         )
+        
+        # ── HIER PLAKKEN WE DE FIX VAN DE PROFESSOR IN ─────────────────────────
+        from justice.abatement.abatement_enerdata import AbatementEnerdata
+        
+        # We pakken de zojuist aangemaakte instantie
+        _m = model_wrapper_local._instance
+        
+        # En overschrijven de complete abatement module met de backstop van 300
+        _m.abatement = AbatementEnerdata(
+            input_dataset=_m.data_loader,
+            time_horizon=_m.time_horizon,
+            scenario=_m.scenario,
+            backstop_cost=300,  # <── Hier dwingen we hem op 300!
+        )
+        print("SUCCESS: Worker process forced abatement backstop_cost to 300 USD!")
+        # ───────────────────────────────────────────────────────────────────────
     else:
         model_wrapper_local._instance.reset_model()
 
@@ -242,7 +258,7 @@ def model_wrapper_local(**kwargs) -> tuple[float, float, float, float]:
     frac = fraction_of_ensemble_above_threshold(
         temperature=data["global_temperature"],
         temperature_year_index=temp_year_idx,
-        threshold=2.0,
+        threshold=1.5,
     )
     frac = float(frac) if np.isfinite(float(frac)) else 1.0  # worst-case fraction
 
