@@ -206,14 +206,14 @@ def model_wrapper_local(**kwargs) -> tuple[float, float, float, float]:
         # We pakken de zojuist aangemaakte instantie
         _m = model_wrapper_local._instance
         
-        # En overschrijven de complete abatement module met de backstop van 300
+        # En overschrijven de complete abatement module met de backstop van 200
         _m.abatement = AbatementEnerdata(
             input_dataset=_m.data_loader,
             time_horizon=_m.time_horizon,
             scenario=_m.scenario,
             backstop_cost=200,  # <── Hier dwingen we hem op 300!
         )
-        print("SUCCESS: Worker process forced abatement backstop_cost to 300 USD!")
+        print("SUCCESS: Worker process forced abatement backstop_cost to 200 USD!")
         # ───────────────────────────────────────────────────────────────────────
     else:
         model_wrapper_local._instance.reset_model()
