@@ -212,6 +212,9 @@ def model_wrapper_local(**kwargs) -> tuple[float, float, float, float]:
             time_horizon=_m.time_horizon,
             scenario=_m.scenario,
             backstop_cost=200,  # <── Hier dwingen we hem op 300!
+            backstop_cost_decline_rate_per_5_year = 0.101 #was dus eerst 0.025, nu naar 0.101!
+
+            
         )
         print("SUCCESS: Worker process forced abatement backstop_cost to 200 USD!")
         # ───────────────────────────────────────────────────────────────────────
